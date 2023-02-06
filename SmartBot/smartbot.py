@@ -24,15 +24,6 @@ class MarkovChain:
             current_word = next_word
         return result
 
-@commands.command()
-@checks.is_owner()
-async def reset_chain(self, ctx):
-    """Reset the Markov chain data."""
-    print("reset_chain function called")  # add this line
-    self.chain = MarkovChain()
-    await self.config.chain.set([])
-    print("Markov chain data reset")  # add this line
-    await ctx.send("Markov chain data has been reset.")
 
 class SmartBot(commands.Cog):
     def __init__(self, bot):
@@ -48,6 +39,22 @@ class SmartBot(commands.Cog):
                 self.chain.add_text(text)
         self.bot.loop.create_task(initialize_chain())
         self.message_counter = 0
+
+        
+@commands.command(name="fixbrain")
+@checks.is_owner()
+async def reset_chain(self, ctx):
+    """Reset the Markov chain data."""
+    chain_data = await self.config.get_raw("chain")
+    print("Chain data before reset:", chain_data)
+
+    self.chain = MarkovChain()
+    await self.config.set_raw("chain", value=[])
+
+    chain_data = await self.config.get_raw("chain")
+    print("Chain data after reset:", chain_data)
+
+    await ctx.send("Markov chain data has been reset.")
 
     @commands.Cog.listener()
     async def on_message(self, message):
