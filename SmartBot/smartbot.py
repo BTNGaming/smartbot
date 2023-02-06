@@ -47,6 +47,8 @@ class SmartBot(commands.Cog):
         if message.channel.id not in [1067171169687568587, 1067233466200117278]:
             return
 
+        print("Received message:", message.content)
+
         text = message.content.strip()
         self.chain.add_text(text)
         async with self.config.chain.get_lock():
