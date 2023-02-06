@@ -25,6 +25,7 @@ class MarkovChain:
         return result
 
 @commands.command()
+@checks.is_owner()
 async def reset_chain(self, ctx):
     """Reset the Markov chain data."""
     self.chain = MarkovChain()
