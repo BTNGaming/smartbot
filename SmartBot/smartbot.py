@@ -28,9 +28,15 @@ class MarkovChain:
 @checks.is_owner()
 async def reset_chain(self, ctx):
     """Reset the Markov chain data."""
+    chain_data = await self.config.get_raw("chain")
+    print("Chain data before reset:", chain_data)
+
     self.chain = MarkovChain()
-    self.chain_data = []
-    await self.config.set_raw("chain", value=self.chain_data)
+    await self.config.set_raw("chain", value=[])
+
+    chain_data = await self.config.get_raw("chain")
+    print("Chain data after reset:", chain_data)
+
     await ctx.send("Markov chain data has been reset.")
 
 class SmartBot(commands.Cog):
