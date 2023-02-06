@@ -1,0 +1,13 @@
+{
+    "author" : ["BTNGaming"],
+    "install_msg" : "Thank you for trying out the Re-Ignited Test SmartBot.",
+    "name" : "SmartBot",
+    "short" : "A test learning bot that randomly learns and responds in chat",
+    "description" : "BTN Just breaking things as always.",
+    "min_python_version": [3, 6, 0],
+	"tags": [
+		"smart",
+		"learning",
+        "ai-bot"
+	]
+}
