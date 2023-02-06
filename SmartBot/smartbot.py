@@ -32,9 +32,11 @@ class SmartBot(commands.Cog):
         self.config.register_global(**default_global)
 
         self.chain = MarkovChain()
-        chain = await self.config.chain()
-        for text in chain:
-            self.chain.add_text(text)
+        async def initialize_chain():
+            chain = await self.config.chain()
+            for text in chain:
+                self.chain.add_text(text)
+        self.bot.loop.create_task(initialize_chain())
 
     @commands.Cog.listener()
     async def on_message(self, message):
