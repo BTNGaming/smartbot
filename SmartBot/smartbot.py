@@ -24,7 +24,7 @@ class MarkovChain:
             current_word = next_word
         return result
 
-@commands.command()
+@commands.command(name="fixbrain")
 @checks.is_owner()
 async def reset_chain(self, ctx):
     """Reset the Markov chain data."""
