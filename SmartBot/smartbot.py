@@ -25,10 +25,12 @@ class MarkovChain:
         return result
 
 @commands.command(name="fixbrain")
+@checks.is_owner()
 async def reset_chain(self, ctx):
     """Reset the Markov chain data."""
     self.chain = MarkovChain()
-    await self.config.chain.set([])
+    self.chain_data = []
+    await self.config.set_raw("chain", value=self.chain_data)
     await ctx.send("Markov chain data has been reset.")
 
 class SmartBot(commands.Cog):
