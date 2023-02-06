@@ -25,7 +25,6 @@ class MarkovChain:
         return result
 
 @commands.command(name="fixbrain")
-@checks.is_owner()
 async def reset_chain(self, ctx):
     """Reset the Markov chain data."""
     self.chain = MarkovChain()
