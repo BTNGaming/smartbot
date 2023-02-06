@@ -5,14 +5,6 @@ from collections import defaultdict
 import redbot.core
 from redbot.core import Config, checks, commands
 
-class Ping(commands.Cog):
-    """A simple ping command."""
-
-    @commands.command(name="ping", aliases=["p"])
-    async def _ping(self, ctx):
-        """Replies with 'Pong!'"""
-        await ctx.send("Pong!")
-
 class MarkovChain:
     def __init__(self):
         self.data = defaultdict(list)
@@ -52,7 +44,7 @@ class SmartBot(commands.Cog):
         if message.author.id == self.bot.user.id:
             return
 
-        if message.channel.id not in [1067171169687568587, 1067233466200117278]:
+        if message.channel.id not in [1067171169687568587]:
             return
 
         text = message.content.strip()
