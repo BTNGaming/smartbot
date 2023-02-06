@@ -57,6 +57,8 @@ class SmartBot(commands.Cog):
         self.message_counter += 1
         if self.message_counter >= 10 and self.message_counter <= 20:
             generated_message = self.chain.generate_text()
+            while not generated_message:
+                generated_message = self.chain.generate_text()
             if generated_message:
                 await message.channel.send(generated_message)
             self.message_counter = 0
