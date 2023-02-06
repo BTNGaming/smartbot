@@ -39,7 +39,6 @@ class SmartBot(commands.Cog):
                 self.chain.add_text(text)
         self.bot.loop.create_task(initialize_chain())
         self.message_counter = 0
-        print(f"{self.bot.user} is listening to {self.bot.event_stats()} events.")
 
         
 @commands.command(name="fixbrain")
@@ -47,15 +46,22 @@ class SmartBot(commands.Cog):
 async def reset_chain(self, ctx):
     """Reset the Markov chain data."""
     chain_data = await self.config.get_raw("chain")
-    print("Chain data before reset:", chain_data)
+    # print("Chain data before reset:", chain_data)
+    channel = self.bot.get_channel(channel_id) # Replace channel_id with the ID of the channel you want to send messages to
+    await channel.send("Chain data before reset:", chain_data)
 
     self.chain = MarkovChain()
     await self.config.set_raw("chain", value=[])
 
     chain_data = await self.config.get_raw("chain")
-    print("Chain data after reset:", chain_data)
+    # print("Chain data after reset:", chain_data)
+    channel = self.bot.get_channel(channel_id) # Replace channel_id with the ID of the channel you want to send messages to
+    await channel.send("Chain data after reset:", chain_data)
 
-    await ctx.send("Markov chain data has been reset.")
+    print(f"{self.bot.user} is listening to {self.bot.event_stats()} events.")
+    # await ctx.send("Markov chain data has been reset.")
+    channel = self.bot.get_channel(channel_id) # Replace channel_id with the ID of the channel you want to send messages to
+    await channel.send("Markov chain data has been reset.")
 
     @commands.Cog.listener()
     async def on_message(self, message):
