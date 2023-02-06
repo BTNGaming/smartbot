@@ -51,7 +51,7 @@ class SmartBot(commands.Cog):
         if message.author.id == self.bot.user.id:
             return
 
-        if message.channel.id not in [1067171169687568587]:
+        if message.channel.id not in [1067171169687568587, 1068246002731077754]:
             return
 
         text = message.content.strip()
