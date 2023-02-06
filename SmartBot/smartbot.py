@@ -32,7 +32,8 @@ class SmartBot(commands.Cog):
         self.config.register_global(**default_global)
 
         self.chain = MarkovChain()
-        for text in self.config.chain():
+        chain = await self.config.chain()
+        for text in chain:
             self.chain.add_text(text)
 
     @commands.Cog.listener()
@@ -40,10 +41,13 @@ class SmartBot(commands.Cog):
         if message.author.id == self.bot.user.id:
             return
 
+        if message.channel.id not in [1067171169687568587, 1067233466200117278]:
+            return
+
         text = message.content.strip()
         self.chain.add_text(text)
         async with self.config.chain.get_lock():
-            chain = self.config.chain()
+            chain = await self.config.chain()
             chain.append(text)
             await self.config.chain.set(chain)
 
