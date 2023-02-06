@@ -37,6 +37,7 @@ class SmartBot(commands.Cog):
             for text in chain:
                 self.chain.add_text(text)
         self.bot.loop.create_task(initialize_chain())
+        self.message_counter = 0
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -52,6 +53,14 @@ class SmartBot(commands.Cog):
             chain = await self.config.chain()
             chain.append(text)
             await self.config.chain.set(chain)
+        
+        self.message_counter += 1
+        if self.message_counter >= 10 and self.message_counter <= 20:
+            generated_message = self.chain.generate_text()
+            if generated_message:
+                await message.channel.send(generated_message)
+            self.message_counter = 0
+
 
     @commands.command()
     async def speak(self, ctx):
