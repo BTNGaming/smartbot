@@ -24,6 +24,13 @@ class MarkovChain:
             current_word = next_word
         return result
 
+@commands.command()
+async def reset_chain(self, ctx):
+    """Reset the Markov chain data."""
+    self.chain = MarkovChain()
+    await self.config.chain.set([])
+    await ctx.send("Markov chain data has been reset.")
+
 class SmartBot(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -55,7 +62,7 @@ class SmartBot(commands.Cog):
             await self.config.chain.set(chain)
         
         self.message_counter += 1
-        if self.message_counter >= 10 and self.message_counter <= 20:
+        if self.message_counter >= 5 and self.message_counter <= 20:
             generated_message = self.chain.generate_text()
             while not generated_message:
                 generated_message = self.chain.generate_text()
