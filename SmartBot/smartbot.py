@@ -47,7 +47,7 @@ async def reset_chain(self, ctx):
     """Reset the Markov chain data."""
     chain_data = await self.config.get_raw("chain")
     # print("Chain data before reset:", chain_data)
-    channel = self.bot.get_channel(channel_id) # Replace channel_id with the ID of the channel you want to send messages to
+    channel = self.bot.get_channel(1068246002731077754) # Replace channel_id with the ID of the channel you want to send messages to
     await channel.send("Chain data before reset:", chain_data)
 
     self.chain = MarkovChain()
@@ -55,12 +55,12 @@ async def reset_chain(self, ctx):
 
     chain_data = await self.config.get_raw("chain")
     # print("Chain data after reset:", chain_data)
-    channel = self.bot.get_channel(channel_id) # Replace channel_id with the ID of the channel you want to send messages to
+    channel = self.bot.get_channel(1068246002731077754) # Replace channel_id with the ID of the channel you want to send messages to
     await channel.send("Chain data after reset:", chain_data)
 
     print(f"{self.bot.user} is listening to {self.bot.event_stats()} events.")
     # await ctx.send("Markov chain data has been reset.")
-    channel = self.bot.get_channel(channel_id) # Replace channel_id with the ID of the channel you want to send messages to
+    channel = self.bot.get_channel(1068246002731077754) # Replace channel_id with the ID of the channel you want to send messages to
     await channel.send("Markov chain data has been reset.")
 
     @commands.Cog.listener()
