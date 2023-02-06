@@ -39,6 +39,7 @@ class SmartBot(commands.Cog):
                 self.chain.add_text(text)
         self.bot.loop.create_task(initialize_chain())
         self.message_counter = 0
+        print(f"{self.bot.user} is listening to {self.bot.event_stats()} events.")
 
         
 @commands.command(name="fixbrain")
